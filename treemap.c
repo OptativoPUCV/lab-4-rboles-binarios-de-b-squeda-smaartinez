@@ -74,7 +74,13 @@ void insertTreeMap(TreeMap * tree, void* key, void * value)
             free(nuevo);
             return; 
         }
-    } 
+    }
+    if (tree->lower_than(nuevo->pair->key, parent->pair->key)) {
+        parent->left = nuevo;
+    } else {
+        parent->right = nuevo;
+    }
+    tree->current = nuevo; 
 
 }
 

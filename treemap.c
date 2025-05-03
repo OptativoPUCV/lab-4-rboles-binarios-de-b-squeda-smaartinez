@@ -91,12 +91,66 @@ TreeNode * minimum(TreeNode * x)
     return x;
 }
 
+void removeNode(TreeMap * tree, TreeNode* node)
+{
+    //Verficamos si el nodo no existe
+    if( node == NULL) return;
 
-void removeNode(TreeMap * tree, TreeNode* node) {
+    //el nodo no tiene hijos
+    if (node->left == NULL && node->right == NULL)
+    {
+        if(node->parent == NULL)
+        {
+            tree->root = NULL;
+        }
+        
+        else if(node->parent->left == node)
+        {
+            node->parent->left = NULL;
+        }
+        // Aqui estamos cuando el nodo sea el hijo derecho
+        else
+        {
+            node->parent->right = NULL;
+        }
+        free(node->pair);
+        free(node);
+    }
+    //el nodo tiene un hijo
+    else if((node->left == NULL && node->right != NULL) || (node->left != NULL && node->right == NULL))
+    {
+        TreeNode* child = (node->left != NULL) ? node->left : node->right;
 
+        if(node->parent == node)
+        {
+            tree->root = child;
+            child->parent = NULL;
+            // la raiz ahora es el hijo 
+        }
+        else if(node->parent->left == node){
+            node->parent->left = child;
+            child->parent = node->parent;
+        } else {
+            node->parent->right = child;
+            child->parent = node->parent;
+        }
+        free(node->pair);
+        free(node);
+    }
+
+    // el nodo tiene dos hijos
+    else
+    {
+        TreeNode *min = minimum(node->right); 
+
+        node->pair->key = min->pair->key;
+        node->pair->value = min->pair->value;
+        removeNode(tree, min);
+    }
 }
 
-void eraseTreeMap(TreeMap * tree, void* key){
+void eraseTreeMap(TreeMap * tree, void* key)
+{
     if (tree == NULL || tree->root == NULL) return;
 
     if (searchTreeMap(tree, key) == NULL) return;

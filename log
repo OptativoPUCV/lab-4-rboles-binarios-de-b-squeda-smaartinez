@@ -150,3 +150,12 @@ treemap.c:55:15: error: variable 'padre' set but not used [-Werror=unused-but-se
                ^~~~~
 cc1.exe: all warnings being treated as errors
 55051ef
+Sat, May  3, 2025 11:08:56 PM: 
+Compilation failed
+In file included from test.c:4:0:
+treemap.c: In function 'insertTreeMap':
+treemap.c:55:15: error: variable 'padre' set but not used [-Werror=unused-but-set-variable]
+     TreeNode *padre = NULL;
+               ^~~~~
+cc1.exe: all warnings being treated as errors
+ea83633

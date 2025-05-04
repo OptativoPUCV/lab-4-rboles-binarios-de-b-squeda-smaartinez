@@ -159,3 +159,9 @@ treemap.c:55:15: error: variable 'padre' set but not used [-Werror=unused-but-se
                ^~~~~
 cc1.exe: all warnings being treated as errors
 ea83633
+Sat, May  3, 2025 11:09:54 PM: 
+ treemap.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ tests:  29|0
+total_score: 70/70
+17385a4

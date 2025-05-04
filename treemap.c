@@ -63,6 +63,16 @@ void insertTreeMap(TreeMap * tree, void* key, void * value)
         else 
             aux = aux->right; 
     }
+    TreeNode *nuevoNodo = createTreeNode(key, value) ; 
+    if (nuevoNodo == NULL) return ;
+    nuevoNodo->parent = padre ; 
+    if (padre == NULL) tree->root = nuevoNodo ;
+    else if (tree->lower_than(key, padre->pair->key))
+        padre->left = nuevoNodo ; 
+    else
+        padre->right = nuevoNodo ; 
+    
+    tree->current = nuevoNodo ;
 }
 
 TreeNode * minimum(TreeNode * x)
